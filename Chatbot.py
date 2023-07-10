@@ -4,6 +4,9 @@ import os
 # Set up your OpenAI API credentials
 openai.api_key = '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'
 
+#os.environ["OPENAI_API_KEY"] = "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"
+#os.environ["SERPAPI_API_KEY"] = "a04ee48f71a634d065405ad27fb43c7d189c2086be2fd931d1ff3e389ce7fe5f"
+
 # Function to read law data from text files
 def read_law_data(file_paths):
     law_data = []
