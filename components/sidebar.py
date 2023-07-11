@@ -29,15 +29,15 @@ def sidebar():
         st.markdown("---")
         st.markdown("# About")
         st.markdown(
-            "📖KnowledgeGPT allows you to ask questions about your "
-            "documents and get accurate answers with instant citations. "
+            "📖Law Agent allows you to ask questions civil statement "
         )
         st.markdown(
             "This tool is a work in progress. "
-            "You can contribute to the project on [GitHub](https://github.com/mmz-001/knowledge_gpt) "  # noqa: E501
+            "You can contribute to the project on [GitHub](https://github.com/yahyamomtaz) "  # noqa: E501
             "with your feedback and suggestions💡"
         )
-        st.markdown("Made by [mmz_001](https://twitter.com/mm_sasmitha)")
+        st.markdown("Made by Yahya Momtaz [mmz_001](https://twitter.com/mm_sasmitha)")
+        st.markdown("University of Naples Federico II [unina.jpg](https://unina.it)")
         st.markdown("---")
 
         faq()
