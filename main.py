@@ -1,6 +1,6 @@
 import streamlit as st
 
-from components.sidebar import sidebar
+from components import sidebar
 
 from ui import (
     wrap_doc_in_html,
