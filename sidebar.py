@@ -1,10 +1,10 @@
 import streamlit as st
 
 import faq
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import os
 
-load_dotenv()
+#load_dotenv()
 
 
 def sidebar():
