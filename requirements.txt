@@ -1,5 +1,6 @@
-streamlit==0.75.0
+streamlit
 streamlit_chat
 langchain
 sentence_transformers
 openai
+pinecone-client
