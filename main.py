@@ -11,7 +11,18 @@ import streamlit as st
 from streamlit_chat import message
 from utilities import *
 
-st.subheader("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
+st.subheader("Law Agent")
+
+with st.sidebar:
+    st.title('Law Agent')
+    
+    st.markdown('''
+    ## made by Yahya Momtaz
+    - [GitHub](https://github.com/yahyamomtaz)
+    - ['/Users/yaya/Desktop/Text Mining Project/ChatBot/data/unina.jpg']
+
+    ''')
+
 
 if 'responses' not in st.session_state:
     st.session_state['responses'] = ["How can I assist you?"]
