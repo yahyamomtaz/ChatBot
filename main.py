@@ -21,7 +21,7 @@ with st.sidebar:
     - [GitHub](https://github.com/yahyamomtaz)
     ''')
 
-    st.image("https://github.com/yahyamomtaz/ChatBot/blob/main/data/unina.jpg")
+    st.image("data/unina.jpg")
 
 
 if 'responses' not in st.session_state:
