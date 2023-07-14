@@ -11,7 +11,7 @@ import streamlit as st
 from streamlit_chat import message
 from utilities import *
 
-st.subheader("Law Agent")
+#st.subheader("Law Agent")
 
 with st.sidebar:
     st.title('Law Agent')
@@ -19,9 +19,9 @@ with st.sidebar:
     st.markdown('''
     ## made by Yahya Momtaz
     - [GitHub](https://github.com/yahyamomtaz)
-    - ['/Users/yaya/Desktop/Text Mining Project/ChatBot/data/unina.jpg']
-
     ''')
+
+    st.sidebar.image("https://github.com/yahyamomtaz/ChatBot/blob/main/data/unina.jpg", use_column_width=True)
 
 
 if 'responses' not in st.session_state:
