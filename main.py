@@ -1,69 +1,55 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import ConversationChain
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain.prompts import (
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-    ChatPromptTemplate,
-    MessagesPlaceholder
-)
 import streamlit as st
 from streamlit_chat import message
-import utilities
-
-st.subheader("Chatbot with Langchain, ChatGPT, Pinecone, and Streamlit")
-
-if 'responses' not in st.session_state:
-    st.session_state['responses'] = ["How can I assist you?"]
-
-if 'requests' not in st.session_state:
-    st.session_state['requests'] = []
-
-llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key="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")
-
-if 'buffer_memory' not in st.session_state:
-            st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
+import pinecone
+import os
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Pinecone
 
 
-system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
-and if the answer is not contained within the text below, say 'I don't know'""")
+embeddings = OpenAIEmbeddings()
+
+# initialize pinecone
+pinecone.init(
+    api_key=str(os.environ['7097682e-9631-4b87-98fa-704c5ea7097f']),  # find at app.pinecone.io
+    environment=str(os.environ['us-west4-gcp-free'])  # next to api key in console
+)
+
+index_name = str(os.environ['law-agent'])
+
+# Backend / langchain
+def load_chain():
+    docsearch = Pinecone.from_existing_index(index_name, embeddings)
+    return docsearch
+
+chain = load_chain()
+
+# From here down is all the StreamLit UI.
+st.set_page_config(page_title="Law Agent", page_icon=":robot:")
+st.header("Law Agent")
+
+if "generated" not in st.session_state:
+    st.session_state["generated"] = []
+
+if "past" not in st.session_state:
+    st.session_state["past"] = []
 
 
-human_msg_template = HumanMessagePromptTemplate.from_template(template="{input}")
-
-prompt_template = ChatPromptTemplate.from_messages([system_msg_template, MessagesPlaceholder(variable_name="history"), human_msg_template])
-
-conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
+def get_text():
+    input_text = st.text_input("You: ", "Hello, how are you?", key="input")
+    return input_text
 
 
+user_input = get_text()
 
+if user_input:
+    docs = chain.similarity_search(user_input)
+    output = docs[0].page_content
 
-# container for chat history
-response_container = st.container()
-# container for text box
-textcontainer = st.container()
+    st.session_state.past.append(user_input)
+    st.session_state.generated.append(output)
 
+if st.session_state["generated"]:
 
-with textcontainer:
-    query = st.text_input("Query: ", key="input")
-    if query:
-        with st.spinner("typing..."):
-            conversation_string = get_conversation_string()
-            # st.code(conversation_string)
-            refined_query = query_refiner(conversation_string, query)
-            st.subheader("Refined Query:")
-            st.write(refined_query)
-            context = find_match(refined_query)
-            # print(context)  
-            response = conversation.predict(input=f"Context:\n {context} \n\n Query:\n{query}")
-        st.session_state.requests.append(query)
-        st.session_state.responses.append(response) 
-with response_container:
-    if st.session_state['responses']:
-
-        for i in range(len(st.session_state['responses'])):
-            message(st.session_state['responses'][i],key=str(i))
-            if i < len(st.session_state['requests']):
-                message(st.session_state["requests"][i], is_user=True,key=str(i)+ '_user')
-
-          
+    for i in range(len(st.session_state["generated"]) - 1, -1, -1):
+        message(st.session_state["generated"][i], key=str(i))
+        message(st.session_state["past"][i], is_user=True, key=str(i) + "_user")

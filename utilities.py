@@ -1,35 +1,29 @@
-from sentence_transformers import SentenceTransformer
-import pinecone
-import openai
-import streamlit as st
-openai.api_key = "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"
-model = SentenceTransformer('all-MiniLM-L6-v2')
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Pinecone
+import pinecone 
+import os
+from langchain.document_loaders import DirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-pinecone.init(api_key='72ba2794-d4f1-45be-8862-ae24591b54a8', environment='us-east-1-aws')
-index = pinecone.Index('langchain-chatbot')
+my_loader = DirectoryLoader('data', glob='**/*.txt')
+documents = my_loader.load()
+text_splitter = RecursiveCharacterTextSplitter(chunk_size = 700, chunk_overlap = 0)
+docs = text_splitter.split_documents(documents)
 
-def find_match(input):
-    input_em = model.encode(input).tolist()
-    result = index.query(input_em, top_k=2, includeMetadata=True)
-    return result['matches'][0]['metadata']['text']+"\n"+result['matches'][1]['metadata']['text']
+embeddings = OpenAIEmbeddings()
 
-def query_refiner(conversation, query):
 
-    response = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=f"Given the following user query and conversation log, formulate a question that would be the most relevant to provide the user with an answer from a knowledge base.\n\nCONVERSATION LOG: \n{conversation}\n\nQuery: {query}\n\nRefined Query:",
-    temperature=0.7,
-    max_tokens=256,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0
-    )
-    return response['choices'][0]['text']
+# initialize pinecone
+pinecone.init(
+    api_key=os.environ['7097682e-9631-4b87-98fa-704c5ea7097f'],  # find at app.pinecone.io
+    environment=os.environ['us-west4-gcp-free']  # next to api key in console
+)
 
-def get_conversation_string():
-    conversation_string = ""
-    for i in range(len(st.session_state['responses'])-1):
-        
-        conversation_string += "Human: "+st.session_state['requests'][i] + "\n"
-        conversation_string += "Bot: "+ st.session_state['responses'][i+1] + "\n"
-    return conversation_string
+docsearch = Pinecone.from_documents(docs, embeddings, index_name=os.environ['law-agent'])
+
+query = "write me langchain code to build my hugging face model"
+docs = docsearch.similarity_search(query)
+print(docs[0].page_content)
+
+# if you already have an index, you can load it like this
+# docsearch = Pinecone.from_existing_index(index_name, embeddings)
