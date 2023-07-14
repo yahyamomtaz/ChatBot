@@ -2,6 +2,5 @@ streamlit==0.75.0
 streamlit_chat
 langchain
 sentence_transformers
-pinecone
 openai
 ChatOpenAI
