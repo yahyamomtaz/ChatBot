@@ -1,4 +1,5 @@
 import openai
+import streamlit as st
 import os
 
 # Set up your OpenAI API credentials
