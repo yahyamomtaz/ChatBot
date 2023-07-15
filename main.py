@@ -15,6 +15,17 @@ from utilities import *
 
 st.title(':blue[Law Agent] is here :bulb:')
 
+st.markdown(
+    """
+<style>
+.sidebar.sidebar-content {
+    color: #023E73;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 #st.set_page_config(page_title="Law Agent")
 st.get_option("theme.backgroundColor")
 
