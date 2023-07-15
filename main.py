@@ -15,8 +15,6 @@ from utilities import *
 
 st.title(':blue[Law Agent] is here :bulb:')
 
-def main():
-    st.set_page_config(page_title="Law Agent")
 
 #st.set_page_config(page_title="Law Agent")
 
