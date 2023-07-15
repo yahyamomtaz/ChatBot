@@ -10,10 +10,15 @@ from langchain.prompts import (
 import streamlit as st
 from streamlit_chat import message
 from utilities import *
+from dotenv import load_dotenv
 
 #st.subheader("Law Agent")
 
-st.title(':#023e73[Law Agent] is here :bulb:')
+st.title(':blue[Law Agent] is here :bulb:')
+
+def main():
+    load_dotenv()
+    st.set_page_config(page_title="Law Agent")
 
 #st.set_page_config(page_title="Law Agent")
 
