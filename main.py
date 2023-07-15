@@ -17,9 +17,10 @@ with st.sidebar:
     st.title('Law Agent')
     
     st.markdown('''
-    ## made by Yahya Momtaz
+    ## Made by **Yahya Momtaz**
     - [GitHub](https://github.com/yahyamomtaz)
     - [Kaggle](https://www.kaggle.com/yahyamomtaz)
+    - [Linkedin](https://www.linkedin.com/in/yahya-momtaz-601b34108)
     - This agent is based on information regarding the split of marital property.
     ''')
 
