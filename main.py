@@ -16,7 +16,7 @@ from utilities import *
 st.title(':blue[Law Agent] is here :bulb:')
 
 st.set_page_config(
-        page_title="Law Agent",
+        page_title="Law Agent"
 )
 
 with st.sidebar:
