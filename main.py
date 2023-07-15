@@ -18,7 +18,7 @@ st.title(':blue[Law Agent] is here :bulb:')
 #st.set_page_config(page_title="Law Agent")
 
 with st.sidebar:
-    st.get_option("theme.primaryColor")
+    st.get_option("theme.backgroundColor")
     st.title('Law Agent')
     
     st.markdown('''
