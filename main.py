@@ -13,7 +13,7 @@ from utilities import *
 
 #st.subheader("Law Agent")
 
-st.title('Law Agent')
+st.title(':blue[Law Agent] is here :bulb:')
 
 with st.sidebar:
     st.title('Law Agent')
