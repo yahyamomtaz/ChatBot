@@ -13,6 +13,8 @@ from utilities import *
 
 #st.subheader("Law Agent")
 
+st.title('Law Agent')
+
 with st.sidebar:
     st.title('Law Agent')
     
