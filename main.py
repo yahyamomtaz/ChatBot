@@ -23,7 +23,7 @@ with st.sidebar:
     - This agent is based on information regarding the split of marital property.
     ''')
 
-    st.image("data/unina.jpg")
+    st.image("data/unina2.png")
 
 
 if 'responses' not in st.session_state:
