@@ -1,5 +1,4 @@
 [theme]
 base="light"
 primaryColor="#023e73"
-
-page_title="Law Agent"
+sidebar = {"backgroundColor"="#023e73"}
