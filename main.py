@@ -19,6 +19,8 @@ with st.sidebar:
     st.markdown('''
     ## made by Yahya Momtaz
     - [GitHub](https://github.com/yahyamomtaz)
+    - [Kaggle](https://www.kaggle.com/yahyamomtaz)
+    - This agent is based on information regarding the split of marital property.
     ''')
 
     st.image("data/unina.jpg")
