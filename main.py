@@ -16,11 +16,12 @@ from utilities import *
 st.title(':blue[Law Agent] is here :bulb:')
 
 #st.set_page_config(page_title="Law Agent")
+st.get_option("theme.backgroundColor")
 
 with st.sidebar:
-    st.get_option("theme.backgroundColor")
     st.title('Law Agent')
-    
+    st.sidebar.get_option("theme.primaryColor")
+
     st.markdown('''
     Made by **Yahya Momtaz**
     - [GitHub](https://github.com/yahyamomtaz)
