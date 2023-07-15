@@ -20,7 +20,7 @@ st.get_option("theme.backgroundColor")
 
 with st.sidebar:
     st.title('Law Agent')
-    st.sidebar.get_option("theme.primaryColor")
+    #st.sidebar.get_option("theme.primaryColor")
 
     st.markdown('''
     Made by **Yahya Momtaz**
