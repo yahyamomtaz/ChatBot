@@ -11,12 +11,12 @@ import streamlit as st
 from streamlit_chat import message
 from utilities import *
 
-#st.subheader("Law Agent")
+st.set_page_config(page_title="Law Agent")
 
 st.title(':blue[Law Agent] is here :bulb:')
 
 
-#st.set_page_config(page_title="Law Agent")
+
 
 with st.sidebar:
     st.title('Law Agent')
