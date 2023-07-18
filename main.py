@@ -1,5 +1,12 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
+from langchain.document_loaders import DirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+import openai
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings import SentenceTransformerEmbeddings
+import pinecone 
+from langchain.vectorstores import Pinecone
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain.prompts import (
     SystemMessagePromptTemplate,
@@ -41,6 +48,34 @@ llm = ChatOpenAI(model_name="gpt-3.5-turbo", openai_api_key="sk-IynZBwqEVNhKjzuo
 if 'buffer_memory' not in st.session_state:
             st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
 
+#s
+directory = 'data'
+
+def load_docs(directory):
+  loader = DirectoryLoader(directory)
+  documents = loader.load()
+  return documents
+
+documents = load_docs(directory)
+
+def split_docs(documents,chunk_size=500,chunk_overlap=20):
+  text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+  docs = text_splitter.split_documents(documents)
+  return docs
+
+docs = split_docs(documents)
+
+embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+
+pinecone.init(
+    api_key="7097682e-9631-4b87-98fa-704c5ea7097f",
+    environment="us-west4-gcp-free"
+)
+
+index = pinecone.Index('law-agent')
+
+index = Pinecone.from_documents(docs, embeddings, index_name=index)
+#e
 
 system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
 and if the answer is not contained within the text below, say 'The information provided to me does not address the query you posed.'""")
