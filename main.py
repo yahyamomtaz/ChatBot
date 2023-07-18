@@ -16,7 +16,7 @@ from langchain.prompts import (
 )
 import streamlit as st
 from streamlit_chat import message
-from utilities import *
+from utils import *
 
 st.set_page_config(page_title="Law Agent")
 
