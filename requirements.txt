@@ -6,3 +6,5 @@ openai
 pinecone-client
 unstructured
 unstructured_inference
+tiktoken
+python-dotenv
