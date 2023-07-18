@@ -8,3 +8,4 @@ unstructured
 unstructured_inference
 tiktoken
 python-dotenv
+pinecone==1.10.0
