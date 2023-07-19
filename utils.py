@@ -2,6 +2,8 @@ from sentence_transformers import SentenceTransformer
 import pinecone
 import openai
 import streamlit as st
+from langchain.embeddings.openai import OpenAIEmbeddings #
+from langchain.vectorstores import Pinecone
 from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import SentenceTransformerEmbeddings
@@ -11,6 +13,30 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 pinecone.init(api_key='7097682e-9631-4b87-98fa-704c5ea7097f', environment='us-west4-gcp-free')
 index = pinecone.Index('law-agent')
+
+#s
+
+directory = 'data'
+
+def load_docs(directory):
+  loader = DirectoryLoader(directory)
+  documents = loader.load()
+  return documents
+
+documents = load_docs(directory)
+
+def split_docs(documents,chunk_size=500,chunk_overlap=20):
+  text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+  docs = text_splitter.split_documents(documents)
+  return docs
+
+docs = split_docs(documents)
+
+embeddings = OpenAIEmbeddings(model_name="ada")
+
+index = Pinecone.from_documents(docs, embeddings, index_name=index)
+
+#e
 
 def find_match(input):
     input_em = model.encode(input).tolist()
