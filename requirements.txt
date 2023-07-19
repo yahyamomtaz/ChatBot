@@ -7,6 +7,4 @@ pinecone-client
 unstructured
 unstructured_inference
 python-dotenv
-chromadb
 tiktoken
-vectorstores
