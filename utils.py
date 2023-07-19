@@ -34,7 +34,7 @@ docs = split_docs(documents)
 
 embeddings = OpenAIEmbeddings(model_name="ada")
 
-index = Pinecone.from_documents(docs, embeddings, index_name=index)
+#index = Pinecone.from_documents(docs, embeddings, index_name=index)
 
 #e
 

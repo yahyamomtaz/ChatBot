@@ -9,4 +9,3 @@ unstructured_inference
 python-dotenv
 chromadb
 tiktoken
-langchain.vectorstores
