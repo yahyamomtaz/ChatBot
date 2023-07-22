@@ -26,7 +26,7 @@ with st.sidebar:
     - This agent is based on information regarding the split of marital property.
     ''')
 
-    st.image("data/unina2.png")
+    st.image("images/unina2.png")
 
 if 'responses' not in st.session_state:
     st.session_state['responses'] = ["How can I assist you?"]
