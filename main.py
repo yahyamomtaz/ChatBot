@@ -29,7 +29,6 @@ with st.sidebar:
 
     st.image("data/unina2.png")
 
-
 if 'responses' not in st.session_state:
     st.session_state['responses'] = ["How can I assist you?"]
 
@@ -43,14 +42,14 @@ if 'buffer_memory' not in st.session_state:
 
 
 system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
-and if the answer is not contained within the text below, say 'The information provided to me does not address the query you posed.'""")
-
+and if the answer is not contained within the text below, say 'I don't know'""")
 
 human_msg_template = HumanMessagePromptTemplate.from_template(template="{input}")
 
 prompt_template = ChatPromptTemplate.from_messages([system_msg_template, MessagesPlaceholder(variable_name="history"), human_msg_template])
 
 conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
+
 
 # container for chat history
 response_container = st.container()
