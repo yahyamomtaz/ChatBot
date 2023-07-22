@@ -29,15 +29,14 @@ embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 query_result = embeddings.embed_query("Hello world")
 
 pinecone.init(
-    api_key="7097682e-9631-4b87-98fa-704c5ea7097f",  # find at app.pinecone.io
-    environment="us-west4-gcp-free"  # next to api key in console
+    api_key="",  # find at app.pinecone.io
+    environment=""  # next to api key in console
 )
 
-index_name = "law-agent"
+index_name = "" #your index name on pinecone
 
 index = Pinecone.from_documents(docs, embeddings, index_name=index_name)
 
-"""""
 def get_similiar_docs(query,k=1,score=False):
   if score:
     similar_docs = index.similarity_search_with_score(query,k=k)
@@ -48,4 +47,3 @@ def get_similiar_docs(query,k=1,score=False):
 query = "what is REIMBURSEMENT OF THE EXPENSES SUSTAINED BY THE SUCCESSOR?"
 similar_docs = get_similiar_docs(query)
 print(similar_docs)
-"""

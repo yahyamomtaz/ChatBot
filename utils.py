@@ -8,10 +8,10 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import SentenceTransformerEmbeddings
 
-openai.api_key = "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"
+openai.api_key = "" # write your openai api key
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-pinecone.init(api_key='7097682e-9631-4b87-98fa-704c5ea7097f', environment='us-west4-gcp-free')
+pinecone.init(api_key='', environment='')
 index = pinecone.Index('law-agent')
 
 def find_match(input):

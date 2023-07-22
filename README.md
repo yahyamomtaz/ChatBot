@@ -1,7 +1,9 @@
-# ChatBot with LLM langchain and Streamlit
+# ChatBot with langchain and Streamlit
 
-First copy your documents on the 'data' folder
+<img src="./images/streamlit.png" width="60%"> <img src="./images/langchain.jpg" width="60%">
 
-Second run the indexing.py file with your pinecone api key
+1. copy your documents on the 'data' folder
 
-Then run the main.py with your api key and enjoy
+2. run the indexing.py file with your pinecone api key
+
+3. run the main.py with your api key
