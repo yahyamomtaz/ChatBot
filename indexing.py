@@ -6,6 +6,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 import pinecone 
 from langchain.vectorstores import Pinecone
 from langchain.embeddings import SentenceTransformerEmbeddings
+from sentence_transformers import SentenceTransformer
 
 directory = 'data'
 
@@ -23,15 +24,28 @@ def split_docs(documents,chunk_size=500,chunk_overlap=20):
 
 docs = split_docs(documents)
 
-
 embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# initialize pinecone
+query_result = embeddings.embed_query("Hello world")
+
 pinecone.init(
     api_key="7097682e-9631-4b87-98fa-704c5ea7097f",  # find at app.pinecone.io
     environment="us-west4-gcp-free"  # next to api key in console
 )
 
-index = pinecone.Index('law-agent')
+index_name = "law-agent"
 
-index = Pinecone.from_documents(docs, embeddings, index_name=index)
+index = Pinecone.from_documents(docs, embeddings, index_name=index_name)
+
+"""""
+def get_similiar_docs(query,k=1,score=False):
+  if score:
+    similar_docs = index.similarity_search_with_score(query,k=k)
+  else:
+    similar_docs = index.similarity_search(query,k=k)
+  return similar_docs
+
+query = "what is REIMBURSEMENT OF THE EXPENSES SUSTAINED BY THE SUCCESSOR?"
+similar_docs = get_similiar_docs(query)
+print(similar_docs)
+"""
