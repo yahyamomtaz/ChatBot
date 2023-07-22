@@ -1,6 +1,6 @@
 # ChatBot with langchain and Streamlit
 
-<img src="./images/streamlit.png" width="60%"> <img src="./images/langchain.jpg" width="60%">
+<img src="./images/streamlit.png" width="40%"> <img src="./images/langchain.jpg" width="40%">
 
 1. copy your documents on the 'data' folder
 
