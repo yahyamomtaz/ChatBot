@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import pinecone
 import openai
 import streamlit as st
-from langchain.embeddings.openai import OpenAIEmbeddings #
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Pinecone
 from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter

@@ -52,9 +52,6 @@ prompt_template = ChatPromptTemplate.from_messages([system_msg_template, Message
 
 conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
 
-
-
-
 # container for chat history
 response_container = st.container()
 # container for text box
@@ -68,7 +65,7 @@ with textcontainer:
             conversation_string = get_conversation_string()
             # st.code(conversation_string)
             refined_query = query_refiner(conversation_string, query)
-            st.subheader("Refined Query:")
+            st.subheader("Regenerated Query:")
             st.write(refined_query)
             context = find_match(refined_query)
             # print(context)  

@@ -1,9 +1,11 @@
+import langchain
 from langchain.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import openai
 from langchain.embeddings.openai import OpenAIEmbeddings
 import pinecone 
 from langchain.vectorstores import Pinecone
+from langchain.embeddings import SentenceTransformerEmbeddings
 
 directory = 'data'
 
@@ -21,7 +23,7 @@ def split_docs(documents,chunk_size=500,chunk_overlap=20):
 
 docs = split_docs(documents)
 
-from langchain.embeddings import SentenceTransformerEmbeddings
+
 embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # initialize pinecone
