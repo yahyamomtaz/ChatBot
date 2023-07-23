@@ -8,5 +8,4 @@
 
 3. run the main.py with your api key
 
-
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://law-agent.streamlit.app)
+<img src="./images/screenshot.png" width="70%">
